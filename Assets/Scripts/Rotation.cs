@@ -1,12 +1,12 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Rotation : MonoBehaviour
 {
    // public float rotationSpeed = 10f;
     // Start is called before the first frame update
+    public GameManager gameManager;
     public GameObject Wheel;
+    public float RotationSpeed;
     void Start()
     {
         
@@ -15,6 +15,10 @@ public class Rotation : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Wheel.transform.Rotate(0,0,0.1f,Space.Self);
+        Wheel.transform.Rotate(0,0,RotationSpeed,Space.Self);
+        this.RotationSpeed = this.RotationSpeed * 0.96f;
+        if(RotationSpeed < 0.0001){
+            gameManager.endGame();
+        }
     }
 }
