@@ -8,6 +8,7 @@ public class Rotation : MonoBehaviour
     public GameObject Wheel;
     public bool wheelTriggered = false;
     public float RotationSpeed;
+    public float wheelAngle;
     void Start()
     {
         
@@ -27,6 +28,12 @@ public class Rotation : MonoBehaviour
             this.RotationSpeed = this.RotationSpeed * 0.991f;
             if(RotationSpeed < 0.1){
                 RotationSpeed = 0;
+                wheelAngle = Wheel.transform.eulerAngles.z;
+                if(wheelAngle < 0){
+                    wheelAngle = wheelAngle + 360;
+                }
+                Debug.Log(wheelAngle % 360f / 30f);
+                Debug.Log(Mathf.RoundToInt(wheelAngle % 360 / 30) + 1);
                 gameManager.endGame();
             }
         } 

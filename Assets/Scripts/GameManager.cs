@@ -7,6 +7,7 @@ public class GameManager : MonoBehaviour
     public void endGame(){
       if(gameEnded == false){
         Debug.Log("game ended");
+        
         gameEnded = true;
       }  
     }
