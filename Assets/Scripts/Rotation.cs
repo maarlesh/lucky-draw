@@ -9,6 +9,8 @@ public class Rotation : MonoBehaviour
     public bool wheelTriggered = false;
     public float RotationSpeed;
     public float wheelAngle;
+
+    public int winningSegment = -1;
     void Start()
     {
         
@@ -17,7 +19,7 @@ public class Rotation : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetKey(KeyCode.Space)){
+        if(Input.GetKey(KeyCode.Space) && gameManager.gameEnded == false){
             Debug.Log(RotationSpeed);
             RotationSpeed += 0.3f;
             Debug.Log("Space button is pressed");
@@ -34,7 +36,9 @@ public class Rotation : MonoBehaviour
                 }
                 Debug.Log(wheelAngle % 360f / 30f);
                 Debug.Log(Mathf.RoundToInt(wheelAngle % 360 / 30) + 1);
-                gameManager.endGame();
+                winningSegment = Mathf.RoundToInt(wheelAngle % 360 / 30) + 1;
+                wheelTriggered = false;
+                gameManager.endGame(winningSegment);
             }
         } 
     }
